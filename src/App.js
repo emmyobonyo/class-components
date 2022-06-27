@@ -1,23 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
-import React from 'react';
+import React from "react"
+import './App.css'
 
-// function App() {
-//   return (
-//     <div>
-//       <h1>This is a wonderful component</h1>
-//     </div>
-//   );
-// }
+/**
+ * Challenge: Convert this stateful function component
+ * to a stateful class component. At the end, everything
+ * should work exactly the way it does now.
+ * 
+ * 1. Change the syntax to a class component
+ * 2. Declare state in the class component that
+ *    can hold the value of `count`
+ * 3. Update the add and subtract methods so you won't
+ *    get the error about calling `setState` on undefined
+ * 4. Update the values in the render method to account
+ *    for the changeover to a class component
+ */
 
-class App extends React.Component {
-  render() {
-    return (
-      <h1>
-        {this.props.type} This is a wonderful Component
-      </h1>
-    )
-  }
+export default class App extends React.Component {
+    state = {
+            count: 0
+        }
+    
+    add = () => {
+        this.setState(prevCount => {
+            return {
+                count: prevCount.count + 1
+            }
+        })
+    }
+    
+    subtract = () => {
+        this.setState(prevCount => {
+            return {
+                count: prevCount.count - 1
+            }
+        })
+    }
+    render () {        
+        return (
+            <div className="counter">
+                <button className="counter--minus" onClick={this.subtract}>–</button>
+                <div className="counter--count">
+                    <h1>{this.state.count}</h1>
+                </div>
+                <button className="counter--plus" onClick={this.add}>+</button>
+            </div>
+        ) 
+    }
 }
-
-export default App;
